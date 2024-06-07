@@ -28,6 +28,7 @@ else
                 -e XAUTHORITY \
                 -v /dev:/dev \
                 -v $ROOT_DIR/turtlebot3_ws:/turtlebot3_ws \
+                -v $ROOT_DIR/../regelum-playground:/regelum-playground \
                --net=host \
                --privileged \
                --name ros-turtle ros-turtle-img

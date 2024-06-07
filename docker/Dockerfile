@@ -98,7 +98,7 @@ ENV LD_LIBRARY_PATH /usr/lib/x86_64-linux-gnu:/usr/lib/i386-linux-gnu${LD_LIBRAR
 RUN echo "source /opt/ros/noetic/setup.bash"  >> ~/.bashrc 
 
 ENV source /opt/ros/noetic/setup.bash
-
+ENV source ~/../turtlebot3_ws/build.bash
 
 RUN echo 'source ~/../turtlebot3_ws/devel/setup.bash' >> ~/.bashrc \
     && echo 'export TURTLEBOT3_MODEL=burger' >> ~/.bashrc
