@@ -34,3 +34,9 @@ else
                --privileged \
                --name ros-turtle ros-turtle-img
 fi
+
+cd ROOT_DIR/.git && \
+  sudo chgrp -R ${id -g -n ${whoamai}} . &&\
+  sudo chmod -R g+rwX . &&\
+  sudo find . -type d -exec chmod g+s '{}' + &&\
+  cd ..

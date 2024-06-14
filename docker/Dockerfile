@@ -96,8 +96,6 @@ COPY docker/10_nvidia.json /usr/share/glvnd/egl_vendor.d/10_nvidia.json
 # Required for non-glvnd setups.
 ENV LD_LIBRARY_PATH /usr/lib/x86_64-linux-gnu:/usr/lib/i386-linux-gnu${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}:/usr/local/nvidia/lib:/usr/local/nvidia/lib64
 
-
-
 # RUN echo 'export ROS_DOMAIN_ID=30 #TURTLEBOT3' >> ~/.bashrc                    
 RUN echo "source /opt/ros/noetic/setup.bash"  >> ~/.bashrc 
 
@@ -110,9 +108,10 @@ RUN apt-get update -y
 
 RUN apt-get install -y python3.11 python3.11-venv python3.11-dev
 RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.11
-RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
-RUN pip3 install --ignore-installed regelum-control==0.3.2
+RUN python3.11 -m pip install --ignore-installed regelum-control==0.3.2
+RUN pip3 uninstall -y pyqt5
 
+RUN git config --global --add safe.directory /regelum-playground
 RUN echo 'source ~/../turtlebot3_ws/devel/setup.bash' >> ~/.bashrc \
     && echo 'export TURTLEBOT3_MODEL=burger' >> ~/.bashrc
 #    && echo 'export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH ~/../turtlebot3_ws/src/turtlebot3_simulations/turtlebot3_gazebo/models' >> ~/.bashrc \
