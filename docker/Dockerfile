@@ -41,6 +41,10 @@ RUN apt-get update && apt-get install -y apt-utils \
 
 # Install ROS desktop and Gazebo
 
+RUN add-apt-repository ppa:trinitronx/focal-backport-buildeps
+RUN apt-get update
+RUN apt-get install -y python3-pyqt5
+
 RUN echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list
 RUN curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
 
@@ -99,10 +103,6 @@ RUN echo "source /opt/ros/noetic/setup.bash"  >> ~/.bashrc
 
 ENV source /opt/ros/noetic/setup.bash
 ENV source ~/../turtlebot3_ws/build.bash
-
-RUN add-apt-repository ppa:trinitronx/focal-backport-buildeps
-RUN apt-get update
-RUN apt-get install -y python3-pyqt5
 
 # Install Python 3.11 and regelum-control module
 RUN add-apt-repository -y ppa:deadsnakes/ppa
