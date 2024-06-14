@@ -100,6 +100,19 @@ RUN echo "source /opt/ros/noetic/setup.bash"  >> ~/.bashrc
 ENV source /opt/ros/noetic/setup.bash
 ENV source ~/../turtlebot3_ws/build.bash
 
+RUN add-apt-repository ppa:trinitronx/focal-backport-buildeps
+RUN apt-get update
+RUN apt-get install -y python3-pyqt5
+
+# Install Python 3.11 and regelum-control module
+RUN add-apt-repository -y ppa:deadsnakes/ppa
+RUN apt-get update -y
+
+RUN apt-get install -y python3.11 python3.11-venv python3.11-dev
+RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.11
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
+RUN pip3 install --ignore-installed regelum-control==0.3.2
+
 RUN echo 'source ~/../turtlebot3_ws/devel/setup.bash' >> ~/.bashrc \
     && echo 'export TURTLEBOT3_MODEL=burger' >> ~/.bashrc
 #    && echo 'export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH ~/../turtlebot3_ws/src/turtlebot3_simulations/turtlebot3_gazebo/models' >> ~/.bashrc \
